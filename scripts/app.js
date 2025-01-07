@@ -35,3 +35,16 @@ fetchCryptoPrices();
 // Fetch prices every 60 seconds
 setInterval(fetchCryptoPrices, 60000);
 
+        // Sort coins by price (highest to lowest)
+        const sortedCoins = Object.entries(data).sort(([, a], [, b]) => b.usd - a.usd);
+
+        sortedCoins.forEach(([coin, values]) => {
+            container.innerHTML += `
+                <div class="crypto">
+                    <h2>${coin.charAt(0).toUpperCase() + coin.slice(1)}</h2>
+                    <p>Price: $${values?.usd || 'N/A'}</p>
+                </div>
+            `;
+        });
+
+

@@ -2,24 +2,25 @@ async function fetchCryptoPrices() {
     const coinList = 'bitcoin,ethereum,xrp,dogecoin,stellar,tao,hedera,chainlink,shiba-inu,the-graph,power-ledger,shadow-token,render-token,the-sandbox,pax-gold,fetch-ai,energy-web-token,basic-attention-token,vechain,helium,agix,e-cash,bittorrent,celer-network,sologenic,the-lux-network,nature-currency,beam,xdc-network,rlusd,usd-coin';
 
     try {
-        const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinList}&vs_currencies=usd`);
-
+        const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinList}`);
+        
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('API Response:', data); // Log the response for debugging
 
         const container = document.getElementById('crypto-container');
         container.innerHTML = ''; // Clear previous content
 
-        // Iterate over the coins and dynamically create HTML
-        Object.keys(data).forEach((coin) => {
+        data.forEach((coin) => {
             container.innerHTML += `
                 <div class="crypto">
-                    <h2>${coin.charAt(0).toUpperCase() + coin.slice(1)}</h2>
-                    <p>Price: $${data[coin]?.usd || 'N/A'}</p>
+                    <h2>${coin.name}</h2>
+                    <p>Price: $${coin.current_price.toFixed(2)}</p>
+                    <p>Market Cap: $${coin.market_cap.toLocaleString()}</p>
+                    <p>24h Change: ${coin.price_change_percentage_24h.toFixed(2)}%</p>
+                    <p>24h Volume: $${coin.total_volume.toLocaleString()}</p>
                 </div>
             `;
         });
@@ -31,12 +32,7 @@ async function fetchCryptoPrices() {
 
 // Fetch prices on page load
 fetchCryptoPrices();
-
-// Fetch prices every 60 seconds
-setInterval(fetchCryptoPrices, 60000);
-
-        // Sort coins by price (highest to lowest)
-        const sortedCoins = Object.entries(data).sort(([, a], [, b]) => b.usd - a.usd);
+) => b.usd - a.usd);
 
         sortedCoins.forEach(([coin, values]) => {
             container.innerHTML += `

@@ -9,7 +9,7 @@ async function fetchCryptoPrices() {
         }
 
         const data = await response.json();
-        console.log('API Response:', data); // Debugging
+        console.log('API Response:', data); // Log the response for debugging
 
         const container = document.getElementById('crypto-container');
         container.innerHTML = ''; // Clear previous content

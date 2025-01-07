@@ -47,4 +47,15 @@ setInterval(fetchCryptoPrices, 60000);
             `;
         });
 
+function filterCoins() {
+    const searchInput = document.getElementById('search').value.toLowerCase();
+    const coins = document.querySelectorAll('.crypto');
+
+    coins.forEach(coin => {
+        const coinName = coin.querySelector('h2').innerText.toLowerCase();
+        coin.style.display = coinName.includes(searchInput) ? '' : 'none';
+    });
+}
+
+
 

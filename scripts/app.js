@@ -31,3 +31,7 @@ async function fetchCryptoPrices() {
 
 // Fetch prices on page load
 fetchCryptoPrices();
+
+// Fetch prices every 60 seconds
+setInterval(fetchCryptoPrices, 60000);
+

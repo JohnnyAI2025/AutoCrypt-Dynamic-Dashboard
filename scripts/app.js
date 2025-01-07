@@ -1,8 +1,13 @@
 async function fetchCryptoPrices() {
     try {
         const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,xrp&vs_currencies=usd');
-        const data = await response.json();
+        
+        // Check if the response is OK (status code 200)
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
+        const data = await response.json();
         const container = document.getElementById('crypto-container');
         container.innerHTML = `
             <div class="crypto">

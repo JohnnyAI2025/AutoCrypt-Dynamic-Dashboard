@@ -1,0 +1,7 @@
+# Exclude Node.js dependencies, Python environments, and sensitive files
+node_modules/
+venv/
+.env
+*.log
+.DS_Store
+Thumbs.db

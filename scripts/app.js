@@ -19,6 +19,8 @@ async function fetchCryptoPrices() {
     `;
 }
 
+document.getElementById('crypto-container').innerHTML = '<p>AutoCrypt Dashboard is running!</p>';
+
 // Fetch prices on load and refresh every minute
 fetchCryptoPrices();
 setInterval(fetchCryptoPrices, 60000);

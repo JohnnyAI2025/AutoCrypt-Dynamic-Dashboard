@@ -4,7 +4,7 @@ console.log("AutoCrypt Dashboard is running!");
 const cryptoContainer = document.getElementById('crypto-container');
 
 // List of coins to fetch
-const coinList = 'bitcoin,ethereum,xrp,dogecoin,stellar,hedera,chainlink';
+const coinList = 'bitcoin,ethereum,xrp,dogecoin,stellar,hedera,chainlink,shiba-inu,cardano,polkadot,solana';
 
 // Fetch and display cryptocurrency data
 async function fetchCryptoData() {
